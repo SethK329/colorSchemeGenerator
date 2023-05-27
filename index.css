@@ -1,0 +1,48 @@
+body{
+margin: 20px auto;
+max-width: 600px;
+border: 1px solid darkred;
+box-sizing: border-box;
+}
+
+Header{
+    text-align: center;
+}
+select{
+    line-height: 34px;
+}
+.input-container{
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 1em;
+}
+
+.color-container{
+    display: flex;
+    border: 1px solid darkred;
+    justify-content: space-around;
+    text-align: center;
+    gap: 5px;
+}
+
+.color{
+    background-color: red;
+    width: 100px;
+    height: 100px;
+    border: 1px solid darkred;
+    padding: 1px;
+    display: block;
+}
+.color-code{
+    background-color: wheat;
+    width: 100px;
+    height: 100px;
+    border: 1px solid darkred;
+    padding-top: 1px;
+    display: block;
+}
+
+.color-sample{
+    height: 400px;
+    max-width: 100px;
+}
