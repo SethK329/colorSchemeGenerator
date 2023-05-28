@@ -27,16 +27,16 @@ function getColorScheme(){
     .then(res=>res.json())
     .then(data=> {
         console.log(data)
+        data.colorFormat = colorSpace.value
         dataArr.unshift(data)
         console.log(dataArr)
-        console.log(colorSpace.value)
         render()
     })
 }
 
 // prints html produced by the constructor into the DOM
 function render(){
-    colorContainer.innerHTML = new ColorScheme(dataArr[0]).getColorContainerHTML(colorSpace.value)
+    colorContainer.innerHTML = new ColorScheme(dataArr[0]).getColorContainerHTML()
 }
 
 // constructor for turning object returned by api into html visual. It is overkill right now,
@@ -45,16 +45,18 @@ class ColorScheme{
     constructor(data){
         Object.assign(this, data)
     }
-    getColorContainerHTML(format) {
-        const {colors} = this
-        console.log(format)
+    getColorContainerHTML() {
+        const {colors, colorFormat} = this
         colorContainer.innerHTML =""
         let colorArr = colors
         let palletteHTML = ''
+        console.log(colorFormat)
+    
         colorArr.forEach(color =>{
+            let formatVariable = colorFormat === "hex"? color.hex.value : colorFormat === "rgb"? color.rgb.value: colorFormat === "hsl"? color.hsl.value: color.hsv.value;
             palletteHTML +=`
              <div class = "color-panel">
-                <p class ="renderedColor">${color.hex.value}</p>
+                <p class ="renderedColor">${formatVariable}</p>
                 <img src="${color.image.bare}" class="color-sample"/>
             </div>
              `
