@@ -10,8 +10,9 @@
 <body>
     <Header>
         <H1>Color Scheme Generator</H1>
-        <div class ="input-container">
-            <label for="colorInput" id ="colorInputLabel">Current color</label>
+        <div class ="input-container" >
+            <select for="colorInput" id ="currentColor">
+            </select>
             <input type = "color" value = "#ff0000" id ="colorInput">
             <select id = "modeSelect">
                 <option value ="monochrome">monochrome</option>
@@ -31,7 +32,7 @@
             <button type = "button" id = "getScheme" for = "colorInput">Get color scheme</button>
         </div>
     </Header>
-    <div id="colorContainer"class = "color-container">
+    <div id="colorContainer" class = "color-container" data-color = "hexcode">
 <!-- rendered color scheme fills here, maybe put in placeholder on page load -->
     </div>
 </body>
