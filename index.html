@@ -9,27 +9,41 @@
 </head>
 <body>
     <Header>
-        <H1>Color Scheme Generator</H1>
+        <H1>Color Scheme-inator</H1>
         <div class ="input-container" >
-            <select for="colorInput" id ="currentColor">
-            </select>
-            <input type = "color" value = "#ff0000" id ="colorInput">
-            <select id = "modeSelect">
-                <option value ="monochrome">monochrome</option>
-                <option value ="monochrome-dark">monochrome-dark</option>
-                <option value ="monochrome-light">monochrome-light</option>
-                <option value ="analogic">analogic</option>
-                <option value ="complement">complement</option>
-                <option value ="analogic-complement">analogic-complement</option>
-                <option value ="triad">triad</option>
-                <option value ="quad">quad</option>
-            </select>
-            <select id = "colorSpace">
-                <option value = "hex">Hex</option>
-                <option value = "rgb">RGB</option>
-                <option value = "hsl">HSL</option>
-            </select>
-            <button type = "button" id = "getScheme" for = "colorInput">Get color scheme</button>
+            <div id = "colorInputContainer">
+                <label for = "colorInput" id = "currentColor">Current: #ff0000</label>
+                <input type = "color" value = "#ff0000" id ="colorInput" class ="color-input">
+            </div>
+            <div class = "option-container">
+                <label for = "modeSelect">Mode Select</label>
+                <select id = "modeSelect">
+                    <option value ="monochrome">monochrome</option>
+                    <option value ="monochrome-dark">monochrome-dark</option>
+                    <option value ="monochrome-light">monochrome-light</option>
+                    <option value ="analogic">analogic</option>
+                    <option value ="complement">complement</option>
+                    <option value ="analogic-complement">analogic-complement</option>
+                    <option value ="triad">triad</option>
+                    <option value ="quad">quad</option>
+                </select>
+            </div>
+            <div class = "option-container">
+                <label for = "colorSpace">Color Space</label>
+                <select id = "colorSpace">
+                    <option value = "hex">Hex</option>
+                    <option value = "rgb">RGB</option>
+                    <option value = "hsl">HSL</option>
+                </select>
+            </div>
+            <div>
+                <button type = "button" id = "getScheme" for = "colorInput">Get color scheme</button>
+                <div class = "option-container">
+                    <label for = "searchedColor">Searched Colors</label>
+                    <select id ="searchedColor">
+                    </select>
+                </div>
+            </div>
         </div>
     </Header>
     <div id="colorContainer" class = "color-container" data-color = "hexcode">

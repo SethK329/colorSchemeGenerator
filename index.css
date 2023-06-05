@@ -8,13 +8,20 @@ box-sizing: border-box;
 Header{
     text-align: center;
 }
-select{
-    line-height: 34px;
+
+label{
+    display: block;
 }
+
+.color-input{
+    width: 100%;    
+}
+
 .input-container{
     display: flex;
     justify-content: space-around;
     padding-bottom: 1em;
+    gap: 5px;
 }
 
 .color-container{
@@ -45,4 +52,9 @@ select{
 .color-sample{
     height: 400px;
     max-width: 100px;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 1s;
 }
