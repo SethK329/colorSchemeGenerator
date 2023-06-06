@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
     <title>Color Scheme Generator</title>
 </head>
@@ -11,7 +14,7 @@
     <Header>
         <H1>Color Scheme-inator</H1>
         <div class ="input-container" >
-            <div id = "colorInputContainer">
+            <div class = "option-container">
                 <label for = "colorInput" id = "currentColor">Current: #ff0000</label>
                 <input type = "color" value = "#ff0000" id ="colorInput" class ="color-input">
             </div>
@@ -36,15 +39,13 @@
                     <option value = "hsl">HSL</option>
                 </select>
             </div>
-            <div>
-                <button type = "button" id = "getScheme" for = "colorInput">Get color scheme</button>
-                <div class = "option-container">
-                    <label for = "searchedColor">Searched Colors</label>
-                    <select id ="searchedColor">
-                    </select>
-                </div>
+            <div class = "option-container">
+                <label for = "searchedColor">Searched Colors</label>
+                <select id ="searchedColor">
+                </select>
             </div>
         </div>
+        <button type = "button" id = "getScheme" for = "colorInput" class = "button">Get Color Scheme</button>
     </Header>
     <div id="colorContainer" class = "color-container" data-color = "hexcode">
 <!-- rendered color scheme fills here, maybe put in placeholder on page load -->

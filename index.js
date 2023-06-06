@@ -32,7 +32,8 @@ let colorIndex = 0
     // finds index for selected color that has been searched and then triggers render on that color
     searchedColor.addEventListener("change", getCurrentColor)
 
-
+    // when changing modes, call api for new data to display change
+    modeSelect.addEventListener("change", getColorScheme)
 
 // calls api and pushes returned object into an array for use in a constructor, also add the colorspace property to data for later use.
 function getColorScheme(){
@@ -63,7 +64,7 @@ function showSearchedColors(){
     searchedColor.innerHTML = ""
     let allSearchedColors = ""
     for(let i=0; i<dataArr.length; i++){
-        allSearchedColors += `<option value ="${dataArr[i]._links.self}"> ${dataArr[i].seed.hex.value} </option>`
+        allSearchedColors += `<option value ="${dataArr[i]._links.self}"> ${dataArr[i].seed.hex.value}  ${dataArr[i].mode} </option>`
     }
     searchedColor.innerHTML = allSearchedColors
 }    
@@ -72,6 +73,7 @@ function showSearchedColors(){
 function getCurrentColor(){
     colorIndex = dataArr.findIndex(i => i._links.self === searchedColor.value)
     colorInput.value = dataArr[colorIndex].seed.hex.value
+    currentColor.innerText=`Current: ${colorInput.value}`
     modeSelect.value = dataArr[colorIndex].mode
     render(colorIndex)
 }
@@ -90,7 +92,7 @@ class ColorScheme{
             // ternary lets me choose what colorspace to display from the object by checking the option from the dom and then changing the variable
             let formatVariable = colorFormat === "hex"? color.hex.value : colorFormat === "rgb"? color.rgb.value: color.hsl.value;
             palletteHTML +=` <div class = "color-panel" data-color ="${formatVariable}">
-                                <p class ="rendered-color" data-color ="${formatVariable}">${formatVariable}</p>
+                                <p class ="color-code" data-color ="${formatVariable}" style = "background-color:${color.hex.value}59">${formatVariable}</p>
                                 <img src="${color.image.bare}" class="color-sample" data-color ="${formatVariable}"/>
                             </div>`
          })
