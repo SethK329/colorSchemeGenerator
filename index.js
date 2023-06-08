@@ -24,9 +24,16 @@ let colorIndex = 0
     //on button click this triggers the series of functions that produce the color scheme
     document.getElementById("getScheme").addEventListener("click", getColorScheme)
 
-    // copies color info from data attribute set by constructor
+    // copies color info from data attribute set by constructor and displays the confirmation message
     colorContainer.addEventListener("click", e=> {
-        navigator.clipboard.writeText(e.target.dataset.color);
+        navigator.clipboard.writeText(e.target.dataset.color)
+        let copyMessage = document.createElement("span")
+        e.target.parentNode.appendChild(copyMessage)
+        copyMessage.innerText = `Copied: ${e.target.dataset.color}`
+        console.log(copyMessage)
+        setTimeout(()=>{
+            e.target.parentNode.removeChild(copyMessage)
+        }, 1000)
     })
 
     // finds index for selected color that has been searched and then triggers render on that color
@@ -54,9 +61,16 @@ function render(arrayIndex){
     // fallback for browsers that don't support view transition api
     if(!document.startViewTransition){
         colorContainer.innerHTML = new ColorScheme(dataArr[arrayIndex]).getColorContainerHTML()
+        // change background color of pallette area to show colors next to seed color, 40 is the alpha channel value
+        colorContainer.style.backgroundColor = dataArr[arrayIndex].seed.hex.value + 40
+
     }
-    // new view transition api. Does automatic animations for changes to the DOM. Currently only works in Chrome 111 and Edge 111.
-    document.startViewTransition(()=> colorContainer.innerHTML = new ColorScheme(dataArr[arrayIndex]).getColorContainerHTML()) 
+        // new view transition api. Does automatic animations for changes to the DOM. Currently only works in Chrome 111 and Edge 111.
+        document.startViewTransition(()=> {colorContainer.innerHTML = new ColorScheme(dataArr[arrayIndex]).getColorContainerHTML()
+        // change background color of pallette area to show colors next to seed color, 40 is the alpha channel value
+        colorContainer.style.backgroundColor = dataArr[arrayIndex].seed.hex.value + 40
+        document.body.style.boxShadow = `0 0 15px ${dataArr[arrayIndex].seed.hex.value}`
+    }) 
 }
 
 // utility function to display searched colors so user can go back and look at pallette again
@@ -87,7 +101,7 @@ class ColorScheme{
     getColorContainerHTML() {
         const {colors, colorFormat} = this
         colorContainer.innerHTML =""
-        let palletteHTML = ''    
+        let palletteHTML = '' 
         colors.forEach(color =>{
             // ternary lets me choose what colorspace to display from the object by checking the option from the dom and then changing the variable
             let formatVariable = colorFormat === "hex"? color.hex.value : colorFormat === "rgb"? color.rgb.value: color.hsl.value;
