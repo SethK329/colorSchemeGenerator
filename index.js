@@ -63,6 +63,7 @@ function render(arrayIndex){
         colorContainer.innerHTML = new ColorScheme(dataArr[arrayIndex]).getColorContainerHTML()
         // change background color of pallette area to show colors next to seed color, 40 is the alpha channel value
         colorContainer.style.backgroundColor = dataArr[arrayIndex].seed.hex.value + 40
+        document.body.style.boxShadow = `0 0 4px ${dataArr[arrayIndex].seed.hex.value}`
 
     }
         // new view transition api. Does automatic animations for changes to the DOM. Currently only works in Chrome 111 and Edge 111.
