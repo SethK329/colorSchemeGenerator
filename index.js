@@ -14,7 +14,7 @@ let colorIndex = 0
     colorInput.addEventListener("change",()=>{currentColor.innerText=`Current: ${colorInput.value}` } )
 
     // changes which color format is displayed
-    colorSpace.addEventListener("change", e=>{
+    colorSpace.addEventListener("change", (e)=>{
         for(let i = 0; i<dataArr.length; i++){
             dataArr[i].colorFormat = colorSpace.value
         }
@@ -30,7 +30,6 @@ let colorIndex = 0
         let copyMessage = document.createElement("span")
         e.target.parentNode.appendChild(copyMessage)
         copyMessage.innerText = `Copied: ${e.target.dataset.color}`
-        console.log(copyMessage)
         setTimeout(()=>{
             e.target.parentNode.removeChild(copyMessage)
         }, 1000)
@@ -61,15 +60,13 @@ function render(arrayIndex){
     // fallback for browsers that don't support view transition api
     if(!document.startViewTransition){
         colorContainer.innerHTML = new ColorScheme(dataArr[arrayIndex]).getColorContainerHTML()
-        // change background color of pallette area to show colors next to seed color, 40 is the alpha channel value
-        colorContainer.style.backgroundColor = dataArr[arrayIndex].seed.hex.value + 40
+        // placed box shadow around body to give some comparison of new colors to the seed color
         document.body.style.boxShadow = `0 0 4px ${dataArr[arrayIndex].seed.hex.value}`
 
     }
         // new view transition api. Does automatic animations for changes to the DOM. Currently only works in Chrome 111 and Edge 111.
         document.startViewTransition(()=> {colorContainer.innerHTML = new ColorScheme(dataArr[arrayIndex]).getColorContainerHTML()
-        // change background color of pallette area to show colors next to seed color, 40 is the alpha channel value
-        colorContainer.style.backgroundColor = dataArr[arrayIndex].seed.hex.value + 40
+        // placed box shadow around body to give some comparison of new colors to the seed color
         document.body.style.boxShadow = `0 0 4px ${dataArr[arrayIndex].seed.hex.value}`
     }) 
 }
@@ -94,7 +91,8 @@ function getCurrentColor(){
 }
 
 // constructor for turning object returned by api into html visual. It might be overkill right now,
-//  but I imagine it would make it easier to use all of the data returned by the api and produce a sort of color pallete dashboard
+//  but I imagine it would make it easier to use all of the data returned by the api and produce a sort of color pallete dashboard,
+// not sure if I am fully utilizing it at this moment.
 class ColorScheme{
     constructor(data){
         Object.assign(this, data)
@@ -106,9 +104,10 @@ class ColorScheme{
         colors.forEach(color =>{
             // ternary lets me choose what colorspace to display from the object by checking the option from the dom and then changing the variable
             let formatVariable = colorFormat === "hex"? color.hex.value : colorFormat === "rgb"? color.rgb.value: color.hsl.value;
+                                                                                                                        // 59 is alpha channel for around 40% opacity
             palletteHTML +=` <div class = "color-panel" data-color ="${formatVariable}">
                                 <p class ="color-code" data-color ="${formatVariable}" style = "background-color:${color.hex.value}59">${formatVariable}</p>
-                                <img src="${color.image.bare}" class="color-sample" data-color ="${formatVariable}"/>
+                                <div class="color-sample" data-color ="${formatVariable}" style = "background-color:${color.hex.value}"></div>
                             </div>`
          })
         return palletteHTML
