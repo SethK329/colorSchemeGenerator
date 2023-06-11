@@ -61,13 +61,13 @@ function render(arrayIndex){
     if(!document.startViewTransition){
         colorContainer.innerHTML = new ColorScheme(dataArr[arrayIndex]).getColorContainerHTML()
         // placed box shadow around body to give some comparison of new colors to the seed color
-        document.body.style.boxShadow = `0 0 4px ${dataArr[arrayIndex].seed.hex.value}`
+        document.body.style.boxShadow = `0 0 4px 1px ${dataArr[arrayIndex].seed.hex.value}`
 
     }
         // new view transition api. Does automatic animations for changes to the DOM. Currently only works in Chrome 111 and Edge 111.
         document.startViewTransition(()=> {colorContainer.innerHTML = new ColorScheme(dataArr[arrayIndex]).getColorContainerHTML()
         // placed box shadow around body to give some comparison of new colors to the seed color
-        document.body.style.boxShadow = `0 0 4px ${dataArr[arrayIndex].seed.hex.value}`
+        document.body.style.boxShadow = `0 0 8px 1px ${dataArr[arrayIndex].seed.hex.value}`
     }) 
 }
 
