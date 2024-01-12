@@ -47,8 +47,12 @@ function getColorScheme(){
     .then(res=>res.json())
     .then(data=> {
         data.colorFormat = colorSpace.value
-        dataArr.unshift(data)
-        console.log(dataArr)
+        let colorCheck = dataArr.filter(i => i._links.self === data._links.self)
+        if(colorCheck.length){
+            colorIndex = dataArr.findIndex(i => i._links.self === data._links.self)
+        }else{
+            dataArr.unshift(data)
+        }
         render(colorIndex)
         showSearchedColors()
     })
